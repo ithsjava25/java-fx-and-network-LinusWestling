@@ -1,6 +1,5 @@
 package com.example;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -28,7 +27,7 @@ public class HelloController {
 
     private final HelloModel model = new HelloModel(new NtfyConnectionImpl());
     @FXML
-    public ListView<NtfyMessageDto> messageView;
+    private ListView<NtfyMessageDto> messageView;
 
     @FXML
     private Label messageLabel;
@@ -73,7 +72,10 @@ public class HelloController {
                             try {
                                 Desktop.getDesktop().browse(new URI(item.attachmentUrl()));
                             } catch (Exception ex) {
-                                ex.printStackTrace();
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error Opening Link");
+                                alert.setContentText("Could not open attachment: " + ex.getMessage());
+                                alert.showAndWait();
                             }
                         });
                         container.getChildren().add(downloadLink);
@@ -96,7 +98,16 @@ public class HelloController {
     public void sendMessage(ActionEvent actionEvent) {
         String content = messageInput.getText();
         model.setMessageToSend(content);
-        model.sendMessage();
+        model.sendMessage().thenAccept(success -> runOnFx(() -> {
+            if (success) {
+                messageInput.clear();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Sändning misslyckades");
+                alert.setContentText("Sändningen misslyckas, försök igen senare.");
+                alert.showAndWait();
+            }
+        }));
     }
 
     @FXML

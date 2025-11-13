@@ -25,7 +25,7 @@ public class HelloModel {
     }
 
     public ObservableList<NtfyMessageDto> getMessages() {
-        return messages;
+        return FXCollections.unmodifiableObservableList(messages);
     }
 
     public String getMessageToSend() {
@@ -44,8 +44,6 @@ public class HelloModel {
      * Returns a greeting based on the current Java and JavaFX versions.
      */
     public String getGreeting() {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
         return "Hello, 404 java not found!";
     }
 

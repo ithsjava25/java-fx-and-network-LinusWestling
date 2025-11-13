@@ -92,6 +92,10 @@ public class NtfyConnectionImpl implements NtfyConnection {
                         })
                         .filter(msg -> "message".equals(msg.event()))
                         .peek(msg -> System.out.println("Mottaget: " + msg.message()))
-                        .forEach(messageHandler));
+                        .forEach(messageHandler))
+                .exceptionally(e -> {
+                    System.err.println("Fel vid mottagande av meddelandet: " + e.getMessage());
+                    return null;
+                });
     }
 }
