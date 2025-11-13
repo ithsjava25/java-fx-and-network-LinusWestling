@@ -28,14 +28,6 @@ public class HelloModel {
         return FXCollections.unmodifiableObservableList(messages);
     }
 
-    public String getMessageToSend() {
-        return messageToSend.get();
-    }
-
-    public StringProperty messageToSendProperty() {
-        return messageToSend;
-    }
-
     public void setMessageToSend(String message) {
         messageToSend.set(message);
     }
@@ -58,11 +50,6 @@ public class HelloModel {
 
     public void receiveMessage() {
         connection.receive(m -> runOnFx(() -> messages.add(m)));
-    }
-
-    public void testAddMessage() {
-        NtfyMessageDto test = new NtfyMessageDto("id123", System.currentTimeMillis(), "message", "mytopic", "Testmeddelande", null);
-        runOnFx(() -> messages.add(test));
     }
 
 
