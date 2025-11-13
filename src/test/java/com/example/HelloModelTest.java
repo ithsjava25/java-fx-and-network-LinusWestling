@@ -68,7 +68,6 @@ class HelloModelTest {
     @Test
     @DisplayName("Given HelloModel with spy connection, when a message is simulated, then it should be added to messages list")
     void receiveShouldAddMessageToModel() {
-        new javafx.embed.swing.JFXPanel();
         var spy = new NtfyConnectionSpy();
         var model = new HelloModel(spy);
 

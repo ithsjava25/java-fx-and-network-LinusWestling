@@ -88,6 +88,7 @@ public class HelloController {
         });
     }
 
+
     @FXML
     private javafx.scene.control.TextField messageInput;
 

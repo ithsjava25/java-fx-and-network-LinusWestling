@@ -67,6 +67,7 @@ public class HelloModel {
         runOnFx(() -> messages.add(test));
     }
 
+
     static void runOnFx(Runnable task) {
         try {
             if (Platform.isFxApplicationThread()) task.run();

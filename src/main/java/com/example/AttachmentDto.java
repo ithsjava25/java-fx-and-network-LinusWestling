@@ -5,3 +5,4 @@ public record AttachmentDto(
         String url,
         String type,
         long size) {}
+
