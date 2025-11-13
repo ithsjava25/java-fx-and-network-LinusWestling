@@ -23,7 +23,7 @@ public class NtfyConnectionSpy implements NtfyConnection{
 
     @Override
     public CompletableFuture<Boolean> sendFile(Path path) {
-        return null;
+        return CompletableFuture.completedFuture(true);
     }
 
     public void simulateIncomingMessage(NtfyMessageDto message) {
